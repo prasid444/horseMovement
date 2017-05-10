@@ -3,7 +3,7 @@
 using namespace std;
 
 
-int c=2;
+int c=1;
 struct pos {
 int x;
 int y;
@@ -93,11 +93,8 @@ bool validate(int a, int b){
 
 
 
-void generateTree(int x, int y,pos *p,int c){
+void generateTree(int x, int y,pos *p,int a){
 
-
-
-if(c>0){
 p->DOWN1LEFT=new pos;
 p->DOWN1LEFT->x=x-3;
 p->DOWN1LEFT->y=y-1;
@@ -130,16 +127,17 @@ p->UP3RIGHT=new pos;
 p->UP3RIGHT->x=x+1;
 p->UP3RIGHT->y=y+3;
 
-        c--;
-generateTree(p->DOWN1LEFT->x,p->DOWN1LEFT->y,p->DOWN1LEFT,c);
-generateTree(p->DOWN1RIGHT->x,p->DOWN1RIGHT->y,p->DOWN1RIGHT,c);
-generateTree(p->DOWN3LEFT->x,p->DOWN3LEFT->y,p->DOWN3LEFT,c);
-generateTree(p->DOWN3RIGHT->x,p->DOWN3RIGHT->y,p->DOWN3RIGHT,c);
-generateTree(p->UP1LEFT->x,p->UP1LEFT->y,p->UP1LEFT,c);
-generateTree(p->UP1RIGHT->x,p->UP1RIGHT->y,p->UP1RIGHT,c);
-generateTree(p->UP3LEFT->x,p->UP3LEFT->y,p->UP3LEFT,c);
-generateTree(p->UP3RIGHT->x,p->UP3RIGHT->y,p->UP3RIGHT,c);
+if(a>=0){
+generateTree(p->DOWN1LEFT->x,p->DOWN1LEFT->y,p->DOWN1LEFT,a-1);
+generateTree(p->DOWN1RIGHT->x,p->DOWN1RIGHT->y,p->DOWN1RIGHT,a-1);
+generateTree(p->DOWN3LEFT->x,p->DOWN3LEFT->y,p->DOWN3LEFT,a-1);
+generateTree(p->DOWN3RIGHT->x,p->DOWN3RIGHT->y,p->DOWN3RIGHT,a-1);
+generateTree(p->UP1LEFT->x,p->UP1LEFT->y,p->UP1LEFT,a-1);
+generateTree(p->UP1RIGHT->x,p->UP1RIGHT->y,p->UP1RIGHT,a-1);
+generateTree(p->UP3LEFT->x,p->UP3LEFT->y,p->UP3LEFT,a-1);
+generateTree(p->UP3RIGHT->x,p->UP3RIGHT->y,p->UP3RIGHT,a-1);
 }
+else return;
 
 }
 int height=0;
@@ -181,7 +179,7 @@ else
         cout<<"within board"<<endl;
         cout<<"The least number of steps is:"<<endl;
 
-        generateTree(initial.x,initial.y,top.root,c);
+        generateTree(initial.x,initial.y,top.root,c-1);
         showelement(top.root,height);
 
     }
